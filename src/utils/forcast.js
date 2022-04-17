@@ -3,6 +3,7 @@ const request = require("postman-request");
 const forcast = (latitude, longitude, callback) => {
   const url = `http://api.weatherstack.com/current?access_key=126cbaf8217136c896babc8f392f35b0&query=${latitude},${longitude}&units=m`;
   request({ url, json: true }, (error, { body }) => {
+    console.log(body.current);
     if (error) {
       callback("Unable to connect to weather service!", undefined);
     } else if (body.error) {
@@ -13,9 +14,13 @@ const forcast = (latitude, longitude, callback) => {
         body.current.weather_descriptions[0] +
           " It is currently " +
           body.current.temperature +
-          " degrees out. There is a " +
+          " degrees but feels like " +
+          body.current.feelslike +
+          ". There is a " +
           body.current.precip +
-          "% chance of rain."
+          "% chance of rain.Visibility is " +
+          body.current.visibility +
+          "km"
       );
     }
   });
