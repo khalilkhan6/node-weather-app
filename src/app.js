@@ -5,6 +5,7 @@ const geocode = require("./utils/geocode");
 const forcast = require("./utils/forcast");
 
 const app = exress();
+const port = process.env.PORT || 3000;
 
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../templates/views"));
@@ -57,6 +58,6 @@ app.get("*", (req, res) => {
     description: "Page not found",
   });
 });
-app.listen(3000, () => {
-  console.log("Server is up on port 3000");
+app.listen(port, () => {
+  console.log("Server is up on port " + port);
 });
